@@ -49,7 +49,7 @@ module.exports = appInfo => {
     csrf: {
       ignore: '/api/*/*'
     },
-    domainWhiteList: ['https://funi.funi8.com', 'http://localhost:3000']
+    domainWhiteList: ['https://funi.funi8.com', 'http://localhost:3000', 'https://blog.zxylucky.com']
   }
  
   // 设置跨域，并设置白名单
