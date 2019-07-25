@@ -88,7 +88,7 @@ class BlogController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const { pageSize, itemSize = 20,tag } = ctx.query;
-    const data = await service.blog.tagOne(pageSize, itemSize, tag)
+    const data = await service.blog.tagOne(pageSize, Number(itemSize), tag)
     if (data) {
       ctx.helper.successRes({
         code: 0,
