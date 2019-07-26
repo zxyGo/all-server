@@ -16,7 +16,10 @@ class BlogService extends Service {
   async detail(blogId) {
     const blog = this.app.mysql.get('blog');
     const blogSql = 'SELECT * FROM blogs WHERE id=?';
+    // 浏览数统计
+    const blogViewSql = 'update blogs set clickNum=(clickNum+1) where id=?' 
     const blogInfo = await blog.query(blogSql, [blogId]);
+    await blog.query(blogViewSql, [blogId]);
     return {
       blogInfo: blogInfo[0]
     }
