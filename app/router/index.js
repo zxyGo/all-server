@@ -1,7 +1,6 @@
 // 路由映射
 module.exports = app => {
-  // require('./novel.js')(app);
-  // const { router, controller} = app;
-  // router.get('/', controller.home.index);
-  // router.get('/news', controller.news.list);
+  const apiNovelRouter = app.router.namespace('/api/common');
+  const {controller} = app;
+  // apiNovelRouter.get('/github', controller.common.github);
 }

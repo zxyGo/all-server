@@ -27,3 +27,15 @@ exports.cors = {
   enable: true,
   package: 'egg-cors'
 }
+
+// github 鉴权
+
+exports.passport = {
+  enable: true,
+  package: 'egg-passport'
+}
+
+exports.passportGithub = {
+  enable: true,
+  package: 'egg-passport-github',
+}

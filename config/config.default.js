@@ -2,7 +2,7 @@
  * 配置
  * 应用、插件、框架的配置
  */
-const {mysql} = require("../config.json");
+const {mysql, gitHub} = require("../config.json");
 
 module.exports = appInfo => {
   const config = {};
@@ -34,6 +34,13 @@ module.exports = appInfo => {
         user: mysql.user,
         password: mysql.password,
         database: 'movie'
+      },
+      shadowsocks: {
+        host: mysql.host,
+        port: mysql.port,
+        user: mysql.user,
+        password: mysql.password,
+        database: 'shadowscoks'
       }
     }
   }
@@ -59,8 +66,15 @@ module.exports = appInfo => {
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
   };
   
+  // github 第三方登录
+  config.passportGithub = {
+    key: gitHub.clientID,
+    secret: gitHub.clientSecret,
+    callbackURL: 'http://127.0.0.1:7001/api/common/github'
+  }
 
   config.proxy = true;
+
 
   return config;
 }

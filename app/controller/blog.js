@@ -96,6 +96,14 @@ class BlogController extends Controller {
       })
     }
   }
+
+  // 添加博客
+  async addBlog() {
+    const { ctx, app, service } = this;
+    const rule = {
+      
+    }
+  }
 }
 
 module.exports = BlogController;

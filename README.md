@@ -74,3 +74,6 @@ npm i egg-scripts --save
 使用 puppeteer 抓取小说
 
 基本使用可以关注 [puppeteer - github](https://github.com/GoogleChrome/puppeteer)
+
+
+### 添加 github 第三方鉴权登录

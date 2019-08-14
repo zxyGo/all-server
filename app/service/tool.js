@@ -15,7 +15,7 @@ class ToolService extends Service {
   // 发送邮件
   async sendMail(email, subject, text, html) {
     const mailOptions = {
-      from: user_email, // 发送者
+      from: mailSet.email, // 发送者
       to: email, // 接收者。可以同时发送多个，以逗号隔开
       subject: subject, // 标题
       text: text, // 文本
