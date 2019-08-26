@@ -23,8 +23,10 @@
   "homepage": "https://github.com/zxyGo/all-server#readme",
   "dependencies": {
     "baidu-aip-sdk": "^2.3.9",
+    "bcryptjs": "^2.4.3",
     "egg": "^2.22.2",
     "egg-cors": "^2.2.0",
+    "egg-jwt": "^3.1.6",
     "egg-mysql": "^3.0.0",
     "egg-passport": "^2.1.0",
     "egg-passport-github": "^1.0.0",

@@ -2,7 +2,7 @@
  * 配置
  * 应用、插件、框架的配置
  */
-const {mysql, gitHub} = require("../config.json");
+const {mysql, gitHub, jwt} = require("../config.json");
 
 module.exports = appInfo => {
   const config = {};
@@ -71,6 +71,11 @@ module.exports = appInfo => {
     key: gitHub.clientID,
     secret: gitHub.clientSecret,
     callbackURL: 'http://127.0.0.1:7001/api/common/github'
+  }
+
+  // 登录认证
+  config.jwt = {
+    secret: jwt.secret
   }
 
   config.proxy = true;

@@ -39,3 +39,9 @@ exports.passportGithub = {
   enable: true,
   package: 'egg-passport-github',
 }
+
+// 登录信息认证插件
+exports.jwt = {
+  enable: true,
+  package: "egg-jwt"
+}

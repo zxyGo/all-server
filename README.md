@@ -77,3 +77,5 @@ npm i egg-scripts --save
 
 
 ### 添加 github 第三方鉴权登录
+
+### npm install egg-jwt --save 用户认证
