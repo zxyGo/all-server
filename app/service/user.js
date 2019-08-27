@@ -66,6 +66,32 @@ class UserService extends Service {
       return false;
     }
   }
+
+  async info(token) {
+    const payload = this.app.jwt.verify(token, this.app.config.jwt.secret);
+    console.log(payload.name)
+    if (payload.name) {
+      const novel = this.app.mysql.get('novel');
+      const sql = 'select avatar from user where name = ?';
+      const sqlRes = await novel.query(sql, [payload.name]);
+      if (sqlRes) {
+        return {
+          code: 1,
+          data: {
+            name: payload.name,
+            avatar: sqlRes[0].avatar
+          }
+        }
+      } else {
+        return false;
+      }
+    } else {
+      return {
+        code: 2,
+        message: 'token失效'
+      }
+    }
+  }
 }
 
 module.exports = UserService;

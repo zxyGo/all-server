@@ -41,6 +41,13 @@ module.exports = appInfo => {
         user: mysql.user,
         password: mysql.password,
         database: 'shadowscoks'
+      },
+      other: {
+        host: mysql.host,
+        port: mysql.port,
+        user: mysql.user,
+        password: mysql.password,
+        database: 'other'
       }
     }
   }
@@ -56,7 +63,7 @@ module.exports = appInfo => {
     csrf: {
       ignore: '/api/*/*'
     },
-    domainWhiteList: ['https://funi.funi8.com', 'http://localhost:3000', 'https://blog.zxylucky.com']
+    domainWhiteList: ['https://funi.funi8.com', 'http://localhost:3000', 'https://blog.zxylucky.com', 'http://localhost:9528']
   }
  
   // 设置跨域，并设置白名单
