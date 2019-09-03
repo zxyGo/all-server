@@ -72,14 +72,15 @@ class UserService extends Service {
     console.log(payload.name)
     if (payload.name) {
       const novel = this.app.mysql.get('novel');
-      const sql = 'select avatar from user where name = ?';
+      const sql = 'select avatar,roles from user where name = ?';
       const sqlRes = await novel.query(sql, [payload.name]);
       if (sqlRes) {
         return {
           code: 1,
           data: {
             name: payload.name,
-            avatar: sqlRes[0].avatar
+            avatar: sqlRes[0].avatar,
+            roles: sqlRes[0].roles
           }
         }
       } else {
