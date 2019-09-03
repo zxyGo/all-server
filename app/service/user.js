@@ -80,7 +80,7 @@ class UserService extends Service {
           data: {
             name: payload.name,
             avatar: sqlRes[0].avatar,
-            roles: sqlRes[0].roles
+            roles: JSON.parse(sqlRes[0].roles)
           }
         }
       } else {
