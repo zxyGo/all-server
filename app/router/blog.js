@@ -6,6 +6,6 @@ module.exports = app => {
   apiBlogRouter.get('/tags', controller.blog.tags); // 获取博客标签
   apiBlogRouter.get('/search', controller.blog.searchBlog); // 模糊搜索博客
   apiBlogRouter.get('/tagOne', controller.blog.tagOne); // 根据博客标签查找博客内容
-  // apiBlogRouter.get('/add', controller.blog.addBLog); // 添加微博
+  apiBlogRouter.post('/add', controller.blog.addBLog); // 添加博客
 
 }

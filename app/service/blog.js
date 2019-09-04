@@ -50,6 +50,21 @@ class BlogService extends Service {
       count: count[0]['COUNT(*)']
     }
   }
+
+  async addBlog(reqData) {
+    const { title, content, description, date, tags } = reqData;
+    const blog = this.app.mysql.get('blog');
+    const sql = 'insert into blogs (title, content, description, date, tags) select ?,?,?,?,? from dual where not exists (select id from blogs where title = ?)';
+    const resSql = await blog.query(sql, [title, content, description, Date.parse(date), tags, title]);
+    if (resSql) {
+      return {
+        code: 1,
+        message: '添加成功'
+      }
+    } else {
+      return false
+    }
+  }
 }
 
 module.exports = BlogService;

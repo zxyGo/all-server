@@ -98,10 +98,25 @@ class BlogController extends Controller {
   }
 
   // 添加博客
-  async addBlog() {
+  async addBLog() {
     const { ctx, app, service } = this;
     const rule = {
-      
+      title: 'string',
+      content: 'string',
+      description: 'string',
+      date: 'string',
+      tags: 'string'
+    }
+    const reqData = ctx.request.body
+    const errors = app.validator.validate(rule, reqData)
+    if (errors) {
+      return ctx.helper.lackData(errors)
+    }
+    const data = await service.blog.addBlog(reqData)
+    if (data) {
+      ctx.helper.successRes(data)
+    } else {
+      ctx.helper.mysqlError();
     }
   }
 }
