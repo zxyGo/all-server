@@ -48,6 +48,13 @@ module.exports = appInfo => {
         user: mysql.user,
         password: mysql.password,
         database: 'other'
+      },
+      stock: {
+        host: mysql.host,
+        port: mysql.port,
+        user: mysql.user,
+        password: mysql.password,
+        database: 'stock'
       }
     }
   }
