@@ -1,5 +1,6 @@
 const Subscription = require('egg').Subscription;
 
+// vpn到期时间定时任务
 class shadowsock extends Subscription {
 // 通过 schedule 属性来设置定时任务的执行间隔等配置
   static get schedule() {
@@ -17,5 +18,10 @@ class shadowsock extends Subscription {
     await service.schedule.shadowsock();
   }
 }
+
+// 获取代理
+
+
+
 
 module.exports = shadowsock;

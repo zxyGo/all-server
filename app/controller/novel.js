@@ -125,6 +125,12 @@ class NovelController extends Controller {
       message: '添加中，等待抓取。。。'
     })
   }
+
+  // 测试
+  async testNovel() {
+    const { service } = this;
+    service.novel.getUrlInfo('https://www.biqudu.net/31_31729/2212637.html');
+  }
 }
 
 module.exports = NovelController;

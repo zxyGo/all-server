@@ -5,7 +5,11 @@ class ProxyService extends Service {
     const proxy = this.app.mysql.get('movie');
     const sql = 'select proxy from proxy_ip where status < 2 limit 1';
     let data = await proxy.query(sql);
-    return data[0].proxy;
+    if (data.length !== 0) {
+      return data[0].proxy;
+    } else {
+      return null;
+    }
   }
 
   /**

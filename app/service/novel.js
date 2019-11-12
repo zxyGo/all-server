@@ -222,6 +222,115 @@ class NovelService extends Service {
   // async saveNovelInfo() {
   //   const novel = this.
   // }
+
+
+  // ********************************************
+  // 请求网站
+  async getUrlInfo (url) {
+    const {service, ctx} = this;
+    if (!proxyIp) {
+      proxyIp = await service.proxy.getProxy();
+      // 没有可用代理后返回
+      if (!proxyIp) {
+        return service.tool.sendMail('775703268@qq.com', '添加小说失败', '没有可以使用的代理', null);
+      }
+    }
+    const browser = await puppeteer.launch({
+      args: [`--proxy-server=${proxyIp}`, '--no-sandbox']
+      // args: ['--no-sandbox']
+    });
+    const context = await browser.createIncognitoBrowserContext();
+    const page = await context.newPage();
+    // 有些网站需要设置UA，默认的UA是：
+    page.setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36");
+    try {
+      await page.goto(url, {
+        headless: false,
+        waitUntil: 'networkidle2',
+        ignoredHTTPSErrors: true,
+        timeout: 60000
+      })
+    } catch (err) {
+      await browser.close();
+      await service.proxy.updateProxy(proxyIp, 2);
+      proxyIp = '';
+      this.getUrlInfo(url);
+      return false;
+    }
+   
+    // 记录成功的代理
+    await service.proxy.updateProxy(proxyIp, 1);
+
+    // 点击下一页
+    let isNextPage = true;
+    do {
+      // 获取章节内容
+      const result = await page.$eval('#content', els => {
+        // console.log(el);
+        // return el;
+        //如果需要赋值要返回Promise
+        return new Promise(async (resolve) => {
+          //...一波骚操作
+          //可以用Dom api啦
+          resolve(els.innerHTML)
+        })
+      });
+      const novelContent = ctx.helper.trim(result);
+      
+
+      // 获取小说ID showpop('/modules/article/addbookcase.php?id=31729&cid=2212637&cname=第一章 蟒雀吞龙&ajax_request=1');
+      const novelInfo = await page.$eval('.bookname .bottem1 a:last-child', el => {
+        return new Promise(async (resolve) => {
+          const infoStr = el.getAttribute('onclick');
+          let infoObj;
+          if (infoStr) {
+            const infoArr = infoStr.match(/\?.*'/)[0].slice(1, -1).split('&');
+            infoObj = infoArr.reduce((acc, cur) => {
+              const temArr = cur.split('='), temObj = new Object();
+              temObj[temArr[0]] = temArr[1];
+              Object.assign(acc, temObj);
+              return acc;
+            }, {})
+          }
+          resolve(infoObj)
+        })
+      })
+      // 获取信息插入数据库
+      if (novelContent.length > 300) {
+        this.addNovelContent(novelInfo.id, novelInfo.cname, novelInfo.cid, novelContent);
+      console.log(novelInfo.cname)
+      }
+      // 设置间隔时间，防封IP
+      const nextPageTitle = await page.$eval('.bottem2 a.next', el => {
+        return new Promise(async (resolve) => {
+          resolve(el.href)
+        });
+      });
+      // console.log(/\.html/.test(nextPageTitle));
+      // 判断是否是最后一章
+      isNextPage = /\.html/.test(nextPageTitle)
+      // 是最后一章跳出循环
+      if (!isNextPage) break;
+
+      await service.tool.sleepWait(Math.ceil(Math.random(0, 1) * 30000) + 30000);
+      const [response] = await Promise.all([
+        page.waitForNavigation(),
+        page.click('.bottem2 a.next'),
+      ]);
+      // 获取下一章,正确返回数据_status:200 _statusText:"OK"
+      // 错误重新循环，换ip
+      if (!response._status || response._status != 200 || response._statusText != 'ok') {
+        await browser.close();
+        await service.proxy.updateProxy(proxyIp, 2);
+        proxyIp = '';
+        return this.getUrlInfo(nextPageTitle);
+      }
+      
+    } while (isNextPage)
+    await browser.close();
+    // 抓取完毕后通知
+    await service.tool.sendMail('775703268@qq.com', '添加小说成功', `抓取完毕`, null);
+  }
 }
 
 module.exports = NovelService;

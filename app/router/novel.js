@@ -11,4 +11,5 @@ module.exports = app => {
   apiNovelRouter.get('/userValid', controller.novel.isValid); // 判断用户登录信息是否有效
 
   apiNovelRouter.post('/addNovel', controller.novel.add_novel); // 添加新的小说
+  apiNovelRouter.post('/test', controller.novel.testNovel); // 添加新的小说
 }

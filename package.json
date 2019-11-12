@@ -36,7 +36,7 @@
     "egg-view-nunjucks": "^2.2.0",
     "iconv-lite": "^0.5.0",
     "nodemailer": "^6.2.1",
-    "puppeteer": "^1.18.1"
+    "puppeteer": "^1.20.0"
   },
   "devDependencies": {
     "egg-bin": "^4.13.0",
