@@ -27,7 +27,7 @@ class UserService extends Service {
         };
         const token = this.app.jwt.sign(userToken, this.app.config.jwt.secret,  {expiresIn: 7 * 24 * 60 * 60});
         return {
-          code: 1,
+          code: 0,
           token: token,
           message: '登录成功'
         }
