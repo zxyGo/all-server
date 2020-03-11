@@ -10,7 +10,7 @@ module.exports = appInfo => {
   config.keys = 'dfaklka';
 
   // mysql的配置
-  config.mysql = 
+  config.mysql =
   {
     // 单数据库信息配置
     clients: {
@@ -70,16 +70,16 @@ module.exports = appInfo => {
     csrf: {
       ignore: '/api/*/*'
     },
-    domainWhiteList: ['https://funi.funi8.com', 'http://localhost:3000', 'https://blog.zxylucky.com', 'https://backstage.zxylucky.com', 'https://www.funi8.com']
+    domainWhiteList: ['https://funi.funi8.com', 'http://localhost:3000', 'https://blog.zxylucky.com', 'https://backstage.zxylucky.com', 'https://www.funi8.com', 'https://www.zxylucky.com']
   }
- 
+
   // 设置跨域，并设置白名单
   config.cors = {
     // origin: 'http://localhost:3000',
     credentials: true,
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
   };
-  
+
   // github 第三方登录
   config.passportGithub = {
     key: gitHub.clientID,
