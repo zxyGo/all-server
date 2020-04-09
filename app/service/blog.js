@@ -17,7 +17,7 @@ class BlogService extends Service {
     const blog = this.app.mysql.get('blog');
     const blogSql = 'SELECT * FROM blogs WHERE id=?';
     // 浏览数统计
-    const blogViewSql = 'update blogs set clickNum=(clickNum+1) where id=?' 
+    const blogViewSql = 'update blogs set clickNum=(clickNum+1) where id=?'
     const blogInfo = await blog.query(blogSql, [blogId]);
     await blog.query(blogViewSql, [blogId]);
     return {
@@ -60,6 +60,36 @@ class BlogService extends Service {
       return {
         code: 1,
         message: '添加成功'
+      }
+    } else {
+      return false
+    }
+  }
+
+  async updateBlog(reqData) {
+    const { blogId, title, content, description, date, tags } = reqData;
+    const blog = this.app.mysql.get('blog');
+    const sql = 'UPDATE blogs SET title=?, content=?, description=?, date=?, tags=? WHERE id=?';
+    const resSql = await blog.query(sql, [title, content, description, Date.parse(date), tags, blogId]);
+    if (resSql) {
+      return {
+        code: 1,
+        message: '修改成功'
+      }
+    } else {
+      return false
+    }
+  }
+
+  async deleteBlog(reqData) {
+    const { blogId } = reqData;
+    const blog = this.app.mysql.get('blog');
+    const sql = 'DELETE FROM blogs WHERE id=?';
+    const resSql = await blog.query(sql, [blogId])
+    if (resSql) {
+      return {
+        code: 1,
+        message: '删除成功'
       }
     } else {
       return false
