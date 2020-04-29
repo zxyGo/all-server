@@ -1,6 +1,6 @@
 const Service = require('egg').Service;
 const nodemailer = require('nodemailer');
-const {mailSet} = require('../../config.json');
+const {mailSet} = require('../../../config.json');
 
 
 const transporter = nodemailer.createTransport({
