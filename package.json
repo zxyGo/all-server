@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/zxyGo/all-server#readme",
   "dependencies": {
-    "baidu-aip-sdk": "^2.3.9",
+    "baidu-aip-sdk": "^2.4.6",
     "bcryptjs": "^2.4.3",
     "egg": "^2.22.2",
     "egg-cors": "^2.2.0",

@@ -76,6 +76,9 @@ npm i egg-scripts --save
 基本使用可以关注 [puppeteer - github](https://github.com/GoogleChrome/puppeteer)
 
 
+### 接入百度OCR
+
+
 ### 添加 github 第三方鉴权登录
 
 ### npm install egg-jwt --save 用户认证

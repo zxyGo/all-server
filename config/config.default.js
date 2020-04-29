@@ -94,6 +94,8 @@ module.exports = appInfo => {
 
   config.proxy = true;
 
+  // OCR
+
 
   return config;
 }
