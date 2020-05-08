@@ -17,7 +17,7 @@ class StockController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const reqData = ctx.request.body;
-    const data = await service.stock.add(reqData);
+    const data = await service.other.stock.add(reqData);
     if (data) {
       ctx.helper.successRes(data);
     } else {
@@ -38,7 +38,7 @@ class StockController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const reqData = ctx.request.body;
-    const data = await service.stock.update(reqData);
+    const data = await service.other.stock.update(reqData);
     if (data) {
       ctx.helper.successRes(data);
     } else {
@@ -57,7 +57,7 @@ class StockController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const reqData = ctx.request.body;
-    const data = await service.stock.delete(reqData);
+    const data = await service.other.stock.delete(reqData);
     if (data) {
       ctx.helper.successRes(data);
     } else {
@@ -68,7 +68,7 @@ class StockController extends Controller {
 
   async list() {
     const { ctx, service } = this;
-    const data = await service.stock.list();
+    const data = await service.other.stock.list();
     if (data) {
       ctx.helper.successRes(data);
     } else {

@@ -14,7 +14,7 @@ class BlogController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const { pageSize, itemSize = 20 } = ctx.query;
-    const data = await service.blog.list(pageSize, Number(itemSize));
+    const data = await service.blog.blog.list(pageSize, Number(itemSize));
     if (data) {
       ctx.helper.successRes({
         ...data,
@@ -34,7 +34,7 @@ class BlogController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const { blogId } = ctx.query;
-    const data = await service.blog.detail(blogId);
+    const data = await service.blog.blog.detail(blogId);
     if (data) {
       ctx.helper.successRes({
         ...data,
@@ -47,7 +47,7 @@ class BlogController extends Controller {
   // 获取博客tags
   async tags() {
     const { ctx, service } = this;
-    const data = await service.blog.tags();
+    const data = await service.blog.blog.tags();
     if (data) {
       ctx.helper.successRes({
         code: 0,
@@ -67,7 +67,7 @@ class BlogController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const { keyword } = ctx.query;
-    const data = await service.blog.searchBlog(keyword);
+    const data = await service.blog.blog.searchBlog(keyword);
     if (data) {
       ctx.helper.successRes({
         code: 0,
@@ -88,7 +88,7 @@ class BlogController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const { pageSize, itemSize = 20,tag } = ctx.query;
-    const data = await service.blog.tagOne(pageSize, Number(itemSize), tag)
+    const data = await service.blog.blog.tagOne(pageSize, Number(itemSize), tag)
     if (data) {
       ctx.helper.successRes({
         code: 0,
@@ -112,7 +112,7 @@ class BlogController extends Controller {
     if (errors) {
       return ctx.helper.lackData(errors)
     }
-    const data = await service.blog.addBlog(reqData)
+    const data = await service.blog.blog.addBlog(reqData)
     if (data) {
       ctx.helper.successRes(data)
     } else {
@@ -138,7 +138,7 @@ class BlogController extends Controller {
     if (errors) {
       return ctx.helper.lackData(errors)
     }
-    const data = await service.blog.updateBlog(reqData)
+    const data = await service.blog.blog.updateBlog(reqData)
     if (data) {
       ctx.helper.successRes(data)
     } else {
@@ -159,7 +159,7 @@ class BlogController extends Controller {
     if (errors) {
       return ctx.helper.lackData(errors)
     }
-    const data = await service.blog.deleteBlog(reqData)
+    const data = await service.blog.blog.deleteBlog(reqData)
     if (data) {
       ctx.helper.successRes(data)
     } else {

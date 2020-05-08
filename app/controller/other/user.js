@@ -17,7 +17,7 @@ class UserController extends Controller {
     }
     const { name, password } = ctx.request.body;
 
-    const data = await service.user.login(name, password);
+    const data = await service.other.user.login(name, password);
     if (data) {
       ctx.helper.successRes(data)
     } else {
@@ -38,7 +38,7 @@ class UserController extends Controller {
     }
     const { name, password } = ctx.request.body;
 
-    const data = await service.user.register(name, password);
+    const data = await service.other.user.register(name, password);
     if (data) {
       ctx.helper.successRes(data)
     } else {
@@ -57,7 +57,7 @@ class UserController extends Controller {
     if (errors) {
       return ctx.helper.lackData(errors);
     }
-    const data = await service.user.info(token);
+    const data = await service.other.user.info(token);
     if (data) {
       ctx.helper.successRes(data)
     } else {

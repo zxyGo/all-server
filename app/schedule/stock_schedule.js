@@ -10,7 +10,7 @@ class stock extends Subscription {
 
   async subscribe() {
     const { service } = this;
-    await service.stock.stockRecode();
+    await service.other.stock.stockRecode();
   }
 }
 

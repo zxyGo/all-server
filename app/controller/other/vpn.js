@@ -15,7 +15,7 @@ class VpnController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const { pageSize, itemSize = 20 } = ctx.query;
-    const data = await service.vpn.list(pageSize, Number(itemSize));
+    const data = await service.other.vpn.list(pageSize, Number(itemSize));
     if (data) {
       ctx.helper.successRes({
         ...data,
@@ -37,7 +37,7 @@ class VpnController extends Controller {
     if (errors) {
       return ctx.helper.lackData(errors)
     }
-    const data = await service.vpn.add(reqData)
+    const data = await service.other.vpn.add(reqData)
     if (data) {
       ctx.helper.successRes(data)
     } else {
@@ -59,7 +59,7 @@ class VpnController extends Controller {
     if (errors) {
       return ctx.helper.lackData(errors)
     }
-    const data = await service.vpn.update(reqData)
+    const data = await service.other.vpn.update(reqData)
     if (data) {
       ctx.helper.successRes(data)
     } else {
@@ -78,7 +78,7 @@ class VpnController extends Controller {
     if (errors) {
       return ctx.helper.lackData(errors)
     }
-    const data = await service.vpn.delete(reqData)
+    const data = await service.other.vpn.delete(reqData)
     if (data) {
       ctx.helper.successRes(data)
     } else {

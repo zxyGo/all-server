@@ -22,7 +22,7 @@ class OtherController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const { url } = ctx.request.body;
-    const data = await service.other.addUrl(url);
+    const data = await service.other.other.addUrl(url);
     if (data) {
       ctx.helper.successRes(data)
     } else {
@@ -32,7 +32,7 @@ class OtherController extends Controller {
 
   async urlList() {
     const { ctx, service } = this;
-    const data = await service.other.urlList();
+    const data = await service.other.other.urlList();
     if (data) {
       ctx.helper.successRes(data)
     } else {
@@ -57,7 +57,7 @@ class OtherController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const { url } = ctx.request.body;
-    const data = await service.other.deleteUrl(url);
+    const data = await service.other.other.deleteUrl(url);
     if (data) {
       ctx.helper.successRes(data)
     } else {

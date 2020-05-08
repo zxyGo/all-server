@@ -4,7 +4,7 @@ const Controller = require('egg').Controller;
 class NovelController extends Controller {
   async list() {
     const { ctx, service } = this;
-    const data = await service.novel.list()
+    const data = await service.other.novel.list()
     if (data) {
       ctx.helper.successRes({
         code: 0,
@@ -23,7 +23,7 @@ class NovelController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const novelId = ctx.query.novelId;
-    const data = await service.novel.chapterList(novelId);
+    const data = await service.other.novel.chapterList(novelId);
     if (data) {
       ctx.helper.successRes({
         code: 0,
@@ -43,7 +43,7 @@ class NovelController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const { novelId, chapterId, nextPage = 0 } = ctx.query;
-    const data = await service.novel.content(novelId, chapterId, nextPage);
+    const data = await service.other.novel.content(novelId, chapterId, nextPage);
     if (data) {
       ctx.helper.successRes({
         code: 0,
@@ -60,7 +60,7 @@ class NovelController extends Controller {
   async saveIp() {
     const { ctx, service } = this;
     const clientIp = ctx.ips.length > 0 ? ctx.ips[ctx.ips.length - 1] : ctx.ip;
-    const data = await service.novel.saveIp(clientIp);
+    const data = await service.other.novel.saveIp(clientIp);
     if (data) {
       ctx.helper.successRes({
         code: 0,
@@ -84,7 +84,7 @@ class NovelController extends Controller {
     }
     const { novelName } = ctx.request.body;
     service.tool.sendMail('775703268@qq.com', '需要添加的小说', novelName, null);
-    const data = await service.novel.needNovel(novelName, clientIp);
+    const data = await service.other.novel.needNovel(novelName, clientIp);
     if (data) {
       ctx.helper.successRes({
         code: 0,
@@ -119,7 +119,7 @@ class NovelController extends Controller {
       return ctx.helper.lackData(errors);
     }
     const { novelName, novelId, novelUrl, queryEle = '' } = ctx.request.body;
-    service.novel.add_novel(novelName, novelId, novelUrl, queryEle);
+    service.other.novel.add_novel(novelName, novelId, novelUrl, queryEle);
     ctx.header.successRes({
       code: 0,
       message: '添加中，等待抓取。。。'
@@ -129,7 +129,7 @@ class NovelController extends Controller {
   // 测试
   async testNovel() {
     const { service } = this;
-    service.novel.getUrlInfo('https://www.biqudu.net/31_31729/2212637.html');
+    service.other.novel.getUrlInfo('https://www.biqudu.net/31_31729/2212637.html');
   }
 }
 
