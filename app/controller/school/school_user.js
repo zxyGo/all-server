@@ -51,10 +51,6 @@ class SchoolUserController extends Controller {
         type: 'nameMax',
         msg: '昵称不能为空！',
       },
-      avatar: {
-        type: 'string',
-        msg: '头像不能为空！'
-      },
       userId: {
         type: 'string',
         msg: '用户ID标识不能为空！'
